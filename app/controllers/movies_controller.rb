@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+
   def create
     Movie.create movie_params 
     redirect_to movies_path
@@ -19,6 +20,7 @@ class MoviesController < ApplicationController
 
   def show
     @actors = Actor.all - @movie.actors
+    @comments = @movie.comments  
   end
 
   def update

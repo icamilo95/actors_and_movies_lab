@@ -25,3 +25,25 @@
 <br><br>
 
 <%= link_to "Back to movies", movies_path %>
+
+
+<ul id="comments">
+  <% @comments.each do |comment| %>
+    <li>  
+      <%= comment.content %>
+      <%= link_to "Delete", movie_remove_comment_path(@movie,comment), method: "Delete" %>  
+    </li>
+  <% end %>
+</ul>
+
+
+<h2>New Comment</h2>
+<%= form_for [@movie, Comment.new] do |form| %>
+  <ol class="formList">
+    <li>
+      <%= form.label :content %>
+      <%= form.text_area :content, :rows => 5 %>
+    </li>
+    <li><%= submit_tag "Add comment" %></li>
+  </ol>
+<% end %>

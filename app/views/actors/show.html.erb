@@ -11,7 +11,8 @@
     <% end %>
   </ul>
   <% unless @movies.empty? %>
-    <%= form_tag add_movie_path do |f|%>
+    <%= form_tag add_movie_path(@actor) do %>
+    
       <%= collection_select :movie, :id, @movies, :id, :title %>
       <%= submit_tag "Add" %>
     <% end %>
@@ -23,3 +24,22 @@
 <br><br>
 
 <%= link_to "Back to actors", actors_path %>
+
+
+<ul id="comments">
+  <% @comments.each do |comment| %>
+    <li><%= comment.content %><%= link_to "Delete", actor_remove_comment_path(@actor,comment), method: "Delete" %></li>
+  <% end %>
+</ul>
+
+
+<h2>New Comment</h2>
+<%= form_for [@actor, Comment.new] do |form| %>
+  <ol class="formList">
+    <li>
+      <%= form.label :content %>
+      <%= form.text_area :content, :rows => 5 %>
+    </li>
+    <li><%= submit_tag "Add comment" %></li>
+  </ol>
+<% end %>

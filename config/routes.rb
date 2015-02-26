@@ -1,15 +1,25 @@
 Rails.application.routes.draw do
 
-  resources :movies
-  resources :actors
+  resources :movies do
+    post '/comments', to: 'comments#create', as: 'comments' 
+    delete '/comments/:id', to: 'comments#destroy', as: 'remove_comment'
+  end
+  
+  resources :actors do 
+    post '/comments', to: 'comments#create', as: 'comments'
+    delete '/comments/:id', to: 'comments#destroy', as: 'remove_comment'
+  end  
 
   post '/movies/:id/actors/new' => 'movies#add_actor', as: :add_actor
   delete 'movies/:id/actors/:actor_id' => 'movies#remove_actor', as: :remove_actor
-
   post '/actors/:id/movies/new' => 'actors#add_movie', as: :add_movie
   delete '/actors/:id/movies/:movie_id' => 'actors#remove_movie', as: :remove_movie
 
+  
+
   root 'site#index'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
