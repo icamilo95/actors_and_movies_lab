@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  root 'access#login'
+
+  get '/login', to: "access#login", as: 'login'
+  get '/signup', to: "access#signup", as: 'signup'
+  post '/login', to: "access#attempt_login"
+  post '/signup', to: "access#create"
+  get '/home', to: "access#home", as: 'home'
+  delete '/logout', to: "access#logout", as: "logout"
+
+  # root 'site#index'
+
   resources :movies do
     post '/comments', to: 'comments#create', as: 'comments' 
     delete '/comments/:id', to: 'comments#destroy', as: 'remove_comment'
@@ -17,7 +28,7 @@ Rails.application.routes.draw do
 
   
 
-  root 'site#index'
+  
 
 
 

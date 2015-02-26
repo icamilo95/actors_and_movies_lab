@@ -39,11 +39,11 @@
 
 <h2>New Comment</h2>
 <%= form_for [@movie, Comment.new] do |form| %>
-  <ol class="formList">
+  <ul class="formList">
     <li>
       <%= form.label :content %>
-      <%= form.text_area :content, :rows => 5 %>
+      <%= form.text_area :content, :rows => 5 , :cols => 50 %>
     </li>
     <li><%= submit_tag "Add comment" %></li>
-  </ol>
+  </ul>
 <% end %>

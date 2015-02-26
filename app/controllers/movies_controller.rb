@@ -20,7 +20,8 @@ class MoviesController < ApplicationController
 
   def show
     @actors = Actor.all - @movie.actors
-    @comments = @movie.comments  
+    
+    @comments = @movie.comments.where(user_id: session[:user_id])
   end
 
   def update
